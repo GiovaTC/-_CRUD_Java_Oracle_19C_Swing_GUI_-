@@ -59,5 +59,28 @@ public class ProductoDAO {
     }
 
     // ACTUALIZAR .
+    public void actualizar(Producto p) {
+
+        String sql =
+                "UPDATE PRODUCTOS_Y " +
+                        "SET NOMBRE=?, PRECIO=?, CANTIDAD=? " +
+                        "WHERE ID=?";
+        try (Connection cn = ConexionDB.getConexion();
+             PreparedStatement ps =
+                     cn.prepareStatement(sql)) {
+
+            ps.setString(1, p.getNombre());
+            ps.setDouble(2, p.getPrecio());
+            ps.setInt(3, p.getCantidad());
+            ps.setInt(4, p.getId());
+
+            ps.executeUpdate();
+
+            System.out.println("Registro actualizado! ");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
 
