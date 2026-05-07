@@ -82,5 +82,26 @@ public class ProductoDAO {
             e.printStackTrace();
         }
     }
-}
+
+    // ELIMINAR
+    public void eliminar(int id) {
+
+        String sql =
+                "DELETE FROM PRODUCTOS_Y WHERE ID=?";
+
+        try (Connection cn = ConexionDB.getConexion();
+             PreparedStatement ps =
+                     cn.prepareStatement(sql)) {
+
+            ps.setInt(1, id);
+
+            ps.executeUpdate();
+
+            System.out.println("Registro eliminado! ");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}   
 
